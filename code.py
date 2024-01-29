@@ -4,13 +4,14 @@ import analogio
 import usb_hid
 from hid_gamepad import Gamepad
 
+import time
+
 gp = Gamepad(usb_hid.devices)
 
 
 # Create some buttons. The physical buttons are connected
 # to ground on one side and these and these pins on the other.
 button_pins = (board.GP2, board.GP3, board.GP4, board.GP5)
-
 
 # Map the buttons to button numbers on the Gamepad.
 # gamepad_buttons[i] will send that button number when buttons[i]
@@ -23,10 +24,11 @@ for button in buttons:
     button.direction = digitalio.Direction.INPUT
     button.pull = digitalio.Pull.UP
 
-
 # Connect an analog two-axis joystick to A4 and A5.
-ax = analogio.AnalogIn(board.A0)
-# ay = analogio.AnalogIn(board.A1)
+a0 = analogio.AnalogIn(board.A0)
+a1 = analogio.AnalogIn(board.A1)
+a2 = analogio.AnalogIn(board.A2)
+a3 = analogio.AnalogIn(board.A3)
 
 # Equivalent of Arduino's map() function.
 
@@ -53,13 +55,15 @@ while True:
     # Convert range[0, 65535] to -127 to 127
 
     gp.move_joysticks(
-
-        x=range_map(ax.value, -65535, 65535, -127, 127),
-
-
-        # y=range_map(ay.value, 0, 65535, -127, 127),
-
+        x=range_map(a0.value, -65535, 65535, -127, 127),
     )
 
     # print(" x", ax.value, "y", ay.value)
-    print(" x", ax.value)
+
+    print("analog 0", a0.value)
+    print("analog 1", a1.value)
+    print("analog 2", a2.value)
+    print("analog 3", a3.value)
+    print("------------------")
+
+    time.sleep(0.2) # TODO remove this later
