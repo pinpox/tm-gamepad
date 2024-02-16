@@ -60,10 +60,16 @@ while True:
 
     # print(" x", ax.value, "y", ay.value)
 
-    print("analog 0", a0.value)
-    print("analog 1", a1.value)
-    print("analog 2", a2.value)
-    print("analog 3", a3.value)
-    print("------------------")
 
-    time.sleep(0.2) # TODO remove this later
+    # print( a0.value, ";", a1.value, ";", a2.value, ";", a3.value)
+    # print( a0.value)
+    # print("analog 0", a0.value)
+    # print("analog 1", a1.value)
+    # print("analog 2", a2.value)
+    # print("analog 3", a3.value)
+    # print("------------------")
+
+    voltage = a0.value * 3.3 / 65536
+    print("VALUE", voltage)
+
+    # time.sleep(0.3) # TODO remove this later
